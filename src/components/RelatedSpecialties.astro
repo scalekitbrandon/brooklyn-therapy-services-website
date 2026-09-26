@@ -1,0 +1,74 @@
+---
+interface Item {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  heading?: string;
+  items: Item[];
+}
+
+const { heading = 'You Might Also Be Looking For', items } = Astro.props;
+---
+
+<section class="related">
+  <div class="related-inner">
+    <p class="related-heading">{heading}</p>
+    <div class="related-links">
+      {items.map((item) => (
+        <a class="related-pill" href={item.href}>{item.label}</a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .related {
+    background: var(--color-bg);
+    padding-block: var(--space-6);
+    border-top: 1px solid var(--color-border);
+  }
+  .related-inner {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+    text-align: center;
+  }
+  .related-heading {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin: 0 0 var(--space-4);
+  }
+  .related-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+  }
+  .related-pill {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-fg);
+    background: transparent;
+    color: var(--color-fg);
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-button);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .related-pill:hover {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-primary-fg);
+  }
+</style>

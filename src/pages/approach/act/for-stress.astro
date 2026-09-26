@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import SpecialtyHero from '../../../components/SpecialtyHero.astro';
+import ProseSection from '../../../components/ProseSection.astro';
+import SignsList from '../../../components/SignsList.astro';
+import HowItWorks from '../../../components/HowItWorks.astro';
+import SpecialistMatch from '../../../components/SpecialistMatch.astro';
+import FaqAccordion from '../../../components/FaqAccordion.astro';
+import RelatedSpecialties from '../../../components/RelatedSpecialties.astro';
+import ContactCta from '../../../components/ContactCta.astro';
+import Footer from '../../../components/Footer.astro';
+import rachelPhoto from '../../../assets/images/rachel-headshot.jpg';
+import lilyPhoto from '../../../assets/images/lily-headshot.jpg';
+
+const footerGroups = [
+  {
+    heading: 'Explore',
+    links: [
+      { label: 'Home', href: '/' },
+      { label: 'Team', href: '/team' },
+      { label: 'Specialties', href: '/specialties' },
+      { label: 'Our Approach', href: '/approach' },
+      { label: 'Online Therapy', href: '/online-therapy' },
+      { label: 'Contact', href: '/#consultation-form' },
+      { label: 'FAQ', href: '/faq' },
+    ],
+  },
+  {
+    heading: 'What We Help With',
+    links: [
+      { label: 'Individual Therapy', href: '/specialties/individual-therapy' },
+      { label: 'Couples Therapy', href: '/specialties/couples-therapy' },
+      { label: 'Anxiety', href: '/specialties/anxiety' },
+      { label: 'OCD', href: '/specialties/ocd' },
+      { label: 'Trauma & PTSD', href: '/specialties/trauma-ptsd' },
+      { label: 'Relationships & Attachment', href: '/specialties/relationships-attachment' },
+      { label: 'Life Transitions', href: '/specialties/life-transitions' },
+      { label: 'Sex & Intimacy', href: '/specialties/sex-intimacy' },
+      { label: 'Grief & Loss', href: '/specialties/grief-loss' },
+      { label: 'Stress & Burnout', href: '/specialties/stress-burnout' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="ACT for Stress in Brooklyn, NY | Brooklyn Therapy Services"
+  description="ACT for chronic stress in Brooklyn and online across New York. Loosen the internal rules driving overfunctioning and burnout."
+>
+  <Header slot="header" />
+
+  <SpecialtyHero
+    heading="ACT for Stress in Brooklyn, NY"
+    intro="Chronic stress often comes from over-functioning — saying yes to everything, ignoring your own limits. ACT helps you act from your values instead of from obligation and fear."
+    ctaLabel="Book a Free Consultation"
+    ctaHref="#consultation-form"
+  />
+
+  <ProseSection
+    heading="How ACT Targets Chronic Stress"
+    paragraphs={[
+      "Chronic stress is often driven less by workload itself and more by the thoughts and rules underneath it — \"I have to say yes,\" \"resting means I'm falling behind,\" \"if I don't do it, it won't get done right.\" ACT works directly on loosening the grip of these rules.",
+      'Rather than adding another productivity technique, ACT for stress focuses on values clarification (what actually matters to you, versus what obligation is dictating) and willingness to tolerate the discomfort of setting a boundary or saying no.',
+    ]}
+  />
+
+  <SignsList
+    heading="Is ACT the Right Fit for Your Stress?"
+    intro="ACT tends to help most if:"
+    signs={[
+      "You know intellectually you need to slow down but can't seem to let yourself",
+      'Guilt shows up immediately when you consider resting or saying no',
+      'Your stress feels driven by internal rules more than external circumstances',
+      'You have tried typical stress-management techniques without lasting change',
+      'You want to reconnect with what you actually value, not just manage symptoms',
+    ]}
+    note="ACT doesn't just add another coping technique to your list — it works on the rules driving the overfunctioning in the first place."
+  />
+
+  <HowItWorks
+    heading="Getting Started Is Simple"
+    steps={[
+      {
+        number: '01',
+        title: 'Reach Out',
+        description: 'Send a message or book a free 15-minute consultation so we can understand what you need and answer any questions.',
+      },
+      {
+        number: '02',
+        title: 'Get Matched',
+        description: "We'll pair you with a therapist whose approach and specialty fit your goals — no guesswork, no starting over.",
+      },
+      {
+        number: '03',
+        title: 'Begin Your Work',
+        description: 'Start weekly sessions, in-person or online, in a space built for honest conversation and real progress.',
+      },
+    ]}
+    ctaLabel="Book a Free Consultation"
+    ctaHref="#consultation-form"
+  />
+
+  <SpecialistMatch
+    heading="Therapists Who Use ACT for Stress"
+    specialists={[
+      {
+        name: 'Rachel Vetter',
+        credentials: 'LCSW',
+        photo: rachelPhoto,
+        blurb: 'Integrative approach blending psychodynamic work, ACT, and CBT — helping clients rebuild capacity after chronic stress and overwhelm.',
+        href: '/team',
+      },
+      {
+        name: 'Lily Berman',
+        credentials: 'LMSW',
+        photo: lilyPhoto,
+        blurb: 'Warm, trauma-informed care for the exhaustion and overwhelm that come with chronic stress and burnout.',
+        href: '/team',
+      },
+    ]}
+  />
+
+  <FaqAccordion
+    faqs={[
+      {
+        question: "Isn't this just another version of 'self-care'?",
+        answer: "It's more specific than that — ACT targets the internal rules driving overfunctioning, not just adding relaxation techniques on top of an unchanged pattern.",
+      },
+      {
+        question: 'Will this help me actually get less busy?',
+        answer: 'Not directly — but it will help you make more deliberate choices about what you take on, rather than saying yes automatically out of guilt or fear.',
+      },
+      {
+        question: 'What if my stress is genuinely from external circumstances, like my job?',
+        answer: 'ACT cannot change external circumstances, but it can change your relationship to the stress they create — including whether change, like a job search, becomes more possible.',
+      },
+      {
+        question: 'How is this different from stress-management coaching?',
+        answer: 'ACT goes deeper into values and psychological flexibility rather than surface-level techniques — it is therapy, not coaching.',
+      },
+      {
+        question: 'Is this available online?',
+        answer: 'Yes — available anywhere in New York via secure video.',
+      },
+    ]}
+  />
+
+  <RelatedSpecialties
+    heading="Related Conditions & Approaches"
+    items={[
+      { label: 'Stress & Burnout', href: '/specialties/stress-burnout' },
+      { label: 'ACT', href: '/approach/act' },
+      { label: 'CBT', href: '/approach/cbt' },
+      { label: 'Individual Therapy', href: '/specialties/individual-therapy' },
+    ]}
+  />
+
+  <ContactCta
+    details={[
+      { label: 'Email', value: 'info@brooklyntherapyservices.com' },
+    ]}
+  />
+
+  <Footer
+    slot="footer"
+    logoText="Brooklyn Therapy Services"
+    email="info@brooklyntherapyservices.com"
+    groups={footerGroups}
+  />
+</BaseLayout>

@@ -1,0 +1,118 @@
+---
+interface Step {
+  number: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  steps: Step[];
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+const { eyebrow = 'How It Works', heading, steps, ctaLabel, ctaHref } = Astro.props;
+---
+
+<section class="how-it-works">
+  <div class="how-inner">
+    <p class="eyebrow">{eyebrow}</p>
+    <h2>{heading}</h2>
+    <div class="steps">
+      {steps.map((step) => (
+        <div class="step">
+          <span class="step-number">{step.number}</span>
+          <h3>{step.title}</h3>
+          <p>{step.description}</p>
+        </div>
+      ))}
+    </div>
+    {ctaLabel && ctaHref && (
+      <a class="how-cta" href={ctaHref}>{ctaLabel}</a>
+    )}
+  </div>
+</section>
+
+<style>
+  .how-it-works {
+    background: var(--color-bg);
+    padding-block: var(--space-8);
+  }
+  .how-inner {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+    text-align: center;
+  }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-primary);
+    margin: 0 0 var(--space-3);
+  }
+  h2 {
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    color: var(--color-fg);
+    margin: 0 0 var(--space-7);
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    text-align: left;
+  }
+  .step-number {
+    display: block;
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 2.5rem;
+    color: var(--color-accent);
+    margin-bottom: var(--space-3);
+  }
+  .step h3 {
+    font-size: 1.35rem;
+    color: var(--color-fg);
+    margin: 0 0 var(--space-2);
+  }
+  .step p {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-fg);
+    opacity: 0.75;
+    margin: 0;
+  }
+
+  .how-cta {
+    display: inline-block;
+    margin-top: var(--space-7);
+    padding: 14px 32px;
+    border-radius: var(--radius-pill);
+    background: var(--color-primary);
+    color: var(--color-primary-fg);
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-button);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .how-cta:hover {
+    opacity: 0.85;
+  }
+
+  @media (max-width: 860px) {
+    .steps {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+      text-align: center;
+    }
+  }
+</style>

@@ -1,0 +1,24 @@
+---
+interface Props {
+  heading?: string;
+}
+
+const { heading } = Astro.props;
+---
+
+<div class="card">
+  {heading && <h3>{heading}</h3>}
+  <slot />
+</div>
+
+<style>
+  .card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    background: var(--color-bg);
+  }
+  .card h3 {
+    margin-bottom: var(--space-2);
+  }
+</style>

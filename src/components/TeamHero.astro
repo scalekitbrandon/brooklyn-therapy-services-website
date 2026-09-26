@@ -1,0 +1,102 @@
+---
+interface Props {
+  eyebrow?: string;
+  headingBold: string;
+  headingLight: string;
+  paragraphs: string[];
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+const { eyebrow = 'Our Therapists', headingBold, headingLight, paragraphs, ctaLabel, ctaHref } = Astro.props;
+---
+
+<section class="team-hero">
+  <div class="team-hero-inner">
+    <div class="card">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>
+        <span class="bold">{headingBold}</span> <span class="light">{headingLight}</span>
+      </h1>
+      {paragraphs.map((p) => <p class="body-copy">{p}</p>)}
+    </div>
+    <a class="team-cta" href={ctaHref}>{ctaLabel}</a>
+  </div>
+</section>
+
+<style>
+  .team-hero {
+    background: var(--color-bg);
+    padding: var(--space-8) var(--space-4) var(--space-7);
+  }
+  .team-hero-inner {
+    max-width: var(--container-max);
+    margin-inline: auto;
+  }
+  .card {
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-7) var(--space-5) var(--space-6);
+    text-align: center;
+  }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-primary);
+    margin: 0 0 var(--space-3);
+  }
+  h1 {
+    font-size: clamp(2rem, 4.2vw, 3.25rem);
+    line-height: 1.2;
+    margin: 0 0 var(--space-5);
+  }
+  h1 .bold {
+    color: var(--color-primary);
+    font-weight: var(--font-weight-heading);
+  }
+  h1 .light {
+    color: var(--color-fg);
+    opacity: 0.55;
+    font-weight: var(--font-weight-heading);
+  }
+  .body-copy {
+    max-width: 640px;
+    margin: 0 auto var(--space-3);
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--color-fg);
+    opacity: 0.8;
+  }
+  .body-copy:last-of-type {
+    margin-bottom: 0;
+  }
+  .body-copy :global(strong) {
+    font-weight: var(--font-weight-nav);
+    opacity: 1;
+  }
+  .team-cta {
+    display: block;
+    width: fit-content;
+    margin: -24px auto 0;
+    position: relative;
+    padding: 14px 32px;
+    border-radius: var(--radius-pill);
+    background: var(--color-primary);
+    color: var(--color-primary-fg);
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-button);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .team-cta:hover {
+    opacity: 0.85;
+  }
+</style>

@@ -1,0 +1,397 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/logo.png';
+
+interface DropdownItem {
+  label: string;
+  href: string;
+}
+
+interface NavLink {
+  label: string;
+  href: string;
+  children?: DropdownItem[];
+}
+
+interface Props {
+  links?: NavLink[];
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+const {
+  links = [
+    { label: 'Home', href: '/' },
+    {
+      label: 'Specialties',
+      href: '/specialties',
+      children: [
+        { label: 'Individual Therapy', href: '/specialties/individual-therapy' },
+        { label: 'Couples Therapy', href: '/specialties/couples-therapy' },
+        { label: 'Anxiety', href: '/specialties/anxiety' },
+      { label: 'OCD', href: '/specialties/ocd' },
+        { label: 'Trauma & PTSD', href: '/specialties/trauma-ptsd' },
+        { label: 'Relationships & Attachment', href: '/specialties/relationships-attachment' },
+        { label: 'Life Transitions', href: '/specialties/life-transitions' },
+        { label: 'Sex & Intimacy', href: '/specialties/sex-intimacy' },
+        { label: 'Grief & Loss', href: '/specialties/grief-loss' },
+        { label: 'Stress & Burnout', href: '/specialties/stress-burnout' },
+      ],
+    },
+    {
+      label: 'Our Approach',
+      href: '/approach',
+      children: [
+        { label: 'ACT', href: '/approach/act' },
+        { label: 'CBT', href: '/approach/cbt' },
+        { label: 'Psychodynamic Therapy', href: '/approach/psychodynamic' },
+        { label: 'ERP', href: '/approach/erp' },
+        { label: 'IFS', href: '/approach/ifs' },
+      ],
+    },
+    { label: 'Online Therapy', href: '/online-therapy' },
+    { label: 'Team', href: '/team' },
+    { label: 'FAQ', href: '/faq' },
+  ],
+  ctaLabel = 'Schedule a Consultation',
+  ctaHref = '/#consultation-form',
+} = Astro.props;
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">
+      <Image src={logo} alt="Brooklyn Therapy Services" height={53} />
+    </a>
+    <nav>
+      <ul>
+        {links.map((link) => (
+          <li class:list={['nav-item', { 'has-dropdown': !!link.children }]}>
+            <a href={link.href}>
+              {link.label}
+              {link.children && <span class="caret" aria-hidden="true">▾</span>}
+            </a>
+            {link.children && (
+              <ul class="dropdown">
+                {link.children.map((child) => (
+                  <li><a href={child.href}>{child.label}</a></li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <a class="header-cta" href={ctaHref}>{ctaLabel}</a>
+
+    <button class="mobile-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <div class="mobile-nav" id="mobile-nav" hidden>
+    <ul>
+      {links.map((link) => (
+        <li>
+          {link.children ? (
+            <details>
+              <summary>
+                {link.label}
+                <span class="mobile-caret" aria-hidden="true">▾</span>
+              </summary>
+              <ul class="mobile-sublist">
+                {link.children.map((child) => (
+                  <li><a href={child.href}>{child.label}</a></li>
+                ))}
+              </ul>
+            </details>
+          ) : (
+            <a href={link.href}>{link.label}</a>
+          )}
+        </li>
+      ))}
+    </ul>
+    <a class="mobile-cta" href={ctaHref}>{ctaLabel}</a>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.mobile-toggle');
+  const panel = document.getElementById('mobile-nav');
+
+  if (toggle && panel) {
+    const closePanel = () => {
+      panel.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.classList.remove('is-open');
+    };
+    const openPanel = () => {
+      panel.hidden = false;
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.classList.add('is-open');
+    };
+
+    toggle.addEventListener('click', () => {
+      if (panel.hidden) openPanel();
+      else closePanel();
+    });
+
+    panel.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', closePanel);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !panel.hidden) closePanel();
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    height: 88px;
+    width: 100%;
+    max-width: 1600px;
+    margin-inline: auto;
+    padding-left: var(--space-3);
+    padding-right: var(--space-5);
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .logo :global(img) {
+    height: 53px;
+    width: auto;
+    display: block;
+  }
+  nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+  nav > ul {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-item {
+    position: relative;
+  }
+  nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--color-fg);
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  nav a:hover {
+    color: var(--color-primary);
+  }
+  .caret {
+    font-size: 0.7em;
+    transition: transform 0.2s ease;
+  }
+  .has-dropdown:hover .caret,
+  .has-dropdown:focus-within .caret {
+    transform: rotate(180deg);
+  }
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 14px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 240px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    list-style: none;
+    margin: 0;
+    padding: var(--space-2) 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(6px);
+    transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s ease;
+    z-index: 20;
+  }
+  .has-dropdown:hover .dropdown,
+  .has-dropdown:focus-within .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+  .dropdown li {
+    display: block;
+  }
+  .dropdown a {
+    display: block;
+    padding: 10px var(--space-4);
+    font-size: 0.8rem;
+    text-transform: none;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+  .dropdown a:hover {
+    background: var(--color-muted);
+  }
+  .header-cta {
+    margin-left: var(--space-4);
+    padding: 10px 26px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-fg);
+    background: transparent;
+    color: var(--color-fg);
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-button);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .header-cta:hover {
+    background: var(--color-fg);
+    color: var(--color-bg);
+  }
+
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .mobile-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--color-fg);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .mobile-toggle.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .mobile-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+  .mobile-toggle.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .mobile-nav {
+    display: none;
+  }
+
+  @media (max-width: 960px) {
+    nav,
+    .header-cta {
+      display: none;
+    }
+    .mobile-toggle {
+      display: flex;
+    }
+    .mobile-nav {
+      display: block;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-3) var(--space-4) var(--space-5);
+    }
+    .mobile-nav[hidden] {
+      display: none;
+    }
+    .mobile-nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .mobile-nav > ul > li {
+      border-bottom: 1px solid var(--color-border);
+    }
+    .mobile-nav > ul > li > a {
+      display: block;
+      padding: var(--space-3) 0;
+      color: var(--color-fg);
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-nav);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .mobile-nav summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-3) 0;
+      color: var(--color-fg);
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-nav);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      list-style: none;
+    }
+    .mobile-nav summary::-webkit-details-marker {
+      display: none;
+    }
+    .mobile-caret {
+      transition: transform 0.2s ease;
+    }
+    .mobile-nav details[open] .mobile-caret {
+      transform: rotate(180deg);
+    }
+    .mobile-sublist {
+      padding-bottom: var(--space-3);
+    }
+    .mobile-sublist a {
+      display: block;
+      padding: var(--space-2) 0 var(--space-2) var(--space-3);
+      color: var(--color-fg);
+      opacity: 0.8;
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+    }
+    .mobile-cta {
+      display: block;
+      margin-top: var(--space-4);
+      padding: 14px 26px;
+      border-radius: var(--radius-pill);
+      background: var(--color-primary);
+      color: var(--color-primary-fg);
+      text-align: center;
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-weight: var(--font-weight-button);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+  }
+</style>

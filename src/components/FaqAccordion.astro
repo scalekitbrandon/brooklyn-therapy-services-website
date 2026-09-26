@@ -1,0 +1,112 @@
+---
+interface Faq {
+  question: string;
+  answer: string;
+  /** Optional HTML version for display (e.g. with inline links). Schema always uses the plain-text `answer`. */
+  answerHtml?: string;
+}
+
+interface Props {
+  heading?: string;
+  faqs: Faq[];
+}
+
+const { heading = 'Frequently Asked Questions', faqs } = Astro.props;
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: f.answer,
+    },
+  })),
+};
+---
+
+<section class="faq">
+  <div class="faq-inner">
+    <h2>{heading}</h2>
+    <div class="faq-list">
+      {faqs.map((f) => (
+        <details class="faq-item">
+          <summary>
+            <span>{f.question}</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </summary>
+          <p set:html={f.answerHtml ?? f.answer} />
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<style>
+  .faq {
+    background: var(--color-muted);
+    padding-block: var(--space-8);
+  }
+  .faq-inner {
+    max-width: 760px;
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+  }
+  h2 {
+    font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+    color: var(--color-fg);
+    margin: 0 0 var(--space-6);
+    text-align: center;
+  }
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--color-border);
+    padding-block: var(--space-4);
+  }
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 1.05rem;
+    color: var(--color-fg);
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-icon {
+    flex-shrink: 0;
+    font-family: var(--font-body);
+    font-size: 1.3rem;
+    color: var(--color-primary);
+    transition: transform 0.2s ease;
+  }
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+  .faq-item p {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--color-fg);
+    opacity: 0.8;
+    margin: var(--space-3) 0 0;
+  }
+  .faq-item p :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>

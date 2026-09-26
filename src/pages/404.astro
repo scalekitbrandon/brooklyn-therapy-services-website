@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const footerGroups = [
+  {
+    heading: 'Explore',
+    links: [
+      { label: 'Home', href: '/' },
+      { label: 'Team', href: '/team' },
+      { label: 'Specialties', href: '/specialties' },
+      { label: 'Our Approach', href: '/approach' },
+      { label: 'Online Therapy', href: '/online-therapy' },
+      { label: 'Contact', href: '/#consultation-form' },
+      { label: 'FAQ', href: '/faq' },
+    ],
+  },
+  {
+    heading: 'What We Help With',
+    links: [
+      { label: 'Individual Therapy', href: '/specialties/individual-therapy' },
+      { label: 'Couples Therapy', href: '/specialties/couples-therapy' },
+      { label: 'Anxiety', href: '/specialties/anxiety' },
+      { label: 'OCD', href: '/specialties/ocd' },
+      { label: 'Trauma & PTSD', href: '/specialties/trauma-ptsd' },
+      { label: 'Relationships & Attachment', href: '/specialties/relationships-attachment' },
+      { label: 'Life Transitions', href: '/specialties/life-transitions' },
+      { label: 'Sex & Intimacy', href: '/specialties/sex-intimacy' },
+      { label: 'Grief & Loss', href: '/specialties/grief-loss' },
+      { label: 'Stress & Burnout', href: '/specialties/stress-burnout' },
+    ],
+  },
+];
+---
+
+<BaseLayout title="Page Not Found | Brooklyn Therapy Services" description="This page could not be found.">
+  <Header slot="header" />
+
+  <section class="not-found">
+    <div class="not-found-inner">
+      <p class="eyebrow">404</p>
+      <h1>We couldn't find that page.</h1>
+      <p class="body-copy">The page you're looking for may have moved or no longer exists. Here are a few places to start instead.</p>
+      <div class="links">
+        <a class="pill primary" href="/">Back to Home</a>
+        <a class="pill" href="/specialties">Browse Specialties</a>
+        <a class="pill" href="/#consultation-form">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer
+    slot="footer"
+    logoText="Brooklyn Therapy Services"
+    email="info@brooklyntherapyservices.com"
+    groups={footerGroups}
+  />
+</BaseLayout>
+
+<style>
+  .not-found {
+    background: var(--color-bg);
+    padding: var(--space-8) var(--space-4);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+  .not-found-inner {
+    max-width: 600px;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-primary);
+    margin: 0 0 var(--space-3);
+  }
+  h1 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    color: var(--color-fg);
+    margin: 0 0 var(--space-4);
+  }
+  .body-copy {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--color-fg);
+    opacity: 0.8;
+    margin: 0 0 var(--space-6);
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+  }
+  .pill {
+    display: inline-block;
+    padding: 12px 26px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-button);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    border: 1px solid var(--color-fg);
+    color: var(--color-fg);
+    background: transparent;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .pill:hover {
+    background: var(--color-fg);
+    color: var(--color-bg);
+  }
+  .pill.primary {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-primary-fg);
+  }
+  .pill.primary:hover {
+    opacity: 0.85;
+    background: var(--color-primary);
+    color: var(--color-primary-fg);
+  }
+</style>

@@ -1,0 +1,63 @@
+---
+interface Props {
+  heading: string;
+  intro: string;
+  ctaLabel: string;
+  ctaHref: string;
+}
+
+const { heading, intro, ctaLabel, ctaHref } = Astro.props;
+---
+
+<section class="specialty-hero">
+  <div class="specialty-hero-inner">
+    <h1>{heading}</h1>
+    <p class="intro">{intro}</p>
+    <a class="hero-cta" href={ctaHref}>{ctaLabel}</a>
+  </div>
+</section>
+
+<style>
+  .specialty-hero {
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-7) var(--space-4) var(--space-8);
+  }
+  .specialty-hero-inner {
+    max-width: 780px;
+    margin-inline: auto;
+    text-align: center;
+  }
+  h1 {
+    font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+    line-height: 1.2;
+    color: var(--color-fg);
+    margin: 0 0 var(--space-4);
+  }
+  .intro {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--color-fg);
+    opacity: 0.8;
+    margin: 0 0 var(--space-5);
+  }
+  .hero-cta {
+    display: inline-block;
+    padding: 14px 32px;
+    border-radius: var(--radius-pill);
+    background: var(--color-primary);
+    color: var(--color-primary-fg);
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-button);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .hero-cta:hover {
+    opacity: 0.85;
+  }
+</style>

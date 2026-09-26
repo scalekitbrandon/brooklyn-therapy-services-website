@@ -1,0 +1,147 @@
+---
+import { Image } from 'astro:assets';
+import founderPhoto from '../assets/images/founder.jpg';
+
+interface Props {
+  heading: string;
+  intro: string;
+  paragraphs: string[];
+  name: string;
+  credentials: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+const { heading, intro, paragraphs, name, credentials, ctaLabel, ctaHref } = Astro.props;
+---
+
+<section class="founder">
+  <div class="founder-inner">
+    <div class="founder-copy">
+      <h2>{heading}</h2>
+      <p class="intro" set:html={intro} />
+      {paragraphs.map((p) => <p class="body-copy">{p}</p>)}
+      {ctaLabel && ctaHref && (
+        <a class="founder-cta" href={ctaHref}>{ctaLabel} →</a>
+      )}
+    </div>
+    <div class="founder-media">
+      <div class="founder-frame">
+        <Image class="founder-photo" src={founderPhoto} alt={name} width={700} format="webp" quality={78} />
+      </div>
+      <div class="founder-caption">
+        <p class="founder-name">{name}</p>
+        <p class="founder-credentials">{credentials}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .founder {
+    background: var(--color-bg);
+    padding-block: var(--space-8);
+  }
+  .founder-inner {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-7);
+    align-items: center;
+  }
+  .founder-copy {
+    order: 1;
+  }
+  .founder-media {
+    order: 2;
+  }
+  h2 {
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    color: var(--color-fg);
+    margin: 0 0 var(--space-4);
+  }
+  .intro,
+  .body-copy {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--color-fg);
+    opacity: 0.85;
+    margin: 0 0 var(--space-4);
+  }
+  .intro :global(strong) {
+    font-weight: var(--font-weight-nav);
+    opacity: 1;
+  }
+  .founder-cta {
+    display: inline-block;
+    margin-top: var(--space-3);
+    padding: 14px 32px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--color-fg);
+    background: transparent;
+    color: var(--color-fg);
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-button);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .founder-cta:hover {
+    background: var(--color-fg);
+    color: var(--color-bg);
+  }
+  .founder-media {
+    border: 1px solid var(--color-primary);
+    padding: var(--space-2);
+  }
+  .founder-frame {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+  }
+  .founder-media :global(.founder-photo) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+  .founder-caption {
+    padding: var(--space-3) var(--space-2) 0;
+  }
+  .founder-name {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 1rem;
+    color: var(--color-fg);
+    margin: 0 0 4px;
+  }
+  .founder-credentials {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 0.9rem;
+    color: var(--color-fg);
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  @media (max-width: 860px) {
+    .founder-inner {
+      grid-template-columns: 1fr;
+    }
+    .founder-copy {
+      order: 2;
+    }
+    .founder-media {
+      order: 1;
+      max-width: 420px;
+      margin-inline: auto;
+    }
+  }
+</style>

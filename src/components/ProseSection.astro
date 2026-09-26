@@ -1,0 +1,56 @@
+---
+interface Props {
+  heading: string;
+  paragraphs: string[];
+  background?: 'bg' | 'muted';
+}
+
+const { heading, paragraphs, background = 'bg' } = Astro.props;
+---
+
+<section class="prose-section" data-bg={background}>
+  <div class="prose-inner">
+    <h2>{heading}</h2>
+    {paragraphs.map((p) => <p class="prose-p" set:html={p} />)}
+  </div>
+</section>
+
+<style>
+  .prose-section {
+    background: var(--color-bg);
+    padding-block: var(--space-8);
+  }
+  .prose-section[data-bg='muted'] {
+    background: var(--color-muted);
+  }
+  .prose-inner {
+    max-width: 720px;
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+  }
+  h2 {
+    font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+    color: var(--color-fg);
+    margin: 0 0 var(--space-4);
+  }
+  .prose-p {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--color-fg);
+    opacity: 0.85;
+    margin: 0 0 var(--space-4);
+  }
+  .prose-p:last-child {
+    margin-bottom: 0;
+  }
+  .prose-p :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .prose-p :global(a:hover) {
+    opacity: 0.8;
+  }
+</style>

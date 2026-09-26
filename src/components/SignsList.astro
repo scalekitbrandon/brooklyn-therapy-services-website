@@ -1,0 +1,126 @@
+---
+interface Props {
+  heading: string;
+  intro?: string;
+  signs: string[];
+  note?: string;
+}
+
+const { heading, intro, signs, note } = Astro.props;
+
+const rows: string[][] = [];
+for (let i = 0; i < signs.length; i += 2) {
+  rows.push(signs.slice(i, i + 2));
+}
+
+const CHECK_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 L10 17 L19 7" /></svg>`;
+---
+
+<section class="signs">
+  <div class="signs-inner">
+    <h2>{heading}</h2>
+    {intro && <p class="signs-intro">{intro}</p>}
+
+    <div class="signs-rows">
+      {rows.map((row, ri) => (
+        <div class="signs-row" data-last={ri === rows.length - 1 ? 'true' : 'false'}>
+          {row.map((sign) => (
+            <div class="sign-item">
+              <span class="sign-icon" set:html={CHECK_ICON} />
+              <span class="sign-text">{sign}</span>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+
+    {note && <p class="signs-note">{note}</p>}
+  </div>
+</section>
+
+<style>
+  .signs {
+    background: var(--color-primary);
+    padding: var(--space-8) var(--space-4);
+  }
+  .signs-inner {
+    max-width: 920px;
+    margin-inline: auto;
+    text-align: center;
+  }
+  h2 {
+    font-size: clamp(1.85rem, 3.4vw, 2.5rem);
+    color: var(--color-bg);
+    margin: 0 0 var(--space-3);
+  }
+  .signs-intro {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+    opacity: 0.9;
+    margin: 0 0 var(--space-7);
+  }
+  .signs-rows {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--space-7);
+  }
+  .signs-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+    padding-block: var(--space-5);
+    border-bottom: 1px solid rgba(243, 239, 229, 0.25);
+  }
+  .signs-row[data-last='true'] {
+    border-bottom: none;
+  }
+  .sign-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    text-align: left;
+  }
+  .sign-icon {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(243, 239, 229, 0.15);
+    color: var(--color-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .sign-icon :global(svg) {
+    width: 16px;
+    height: 16px;
+  }
+  .sign-text {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--color-bg);
+  }
+  .signs-note {
+    max-width: 640px;
+    margin-inline: auto;
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--color-muted);
+    opacity: 0.9;
+  }
+
+  @media (max-width: 700px) {
+    .signs-row {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+  }
+</style>

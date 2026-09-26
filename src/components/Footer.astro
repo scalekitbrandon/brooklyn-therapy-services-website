@@ -1,0 +1,153 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/images/logo.png';
+
+interface LinkGroup {
+  heading: string;
+  links: { label: string; href: string }[];
+}
+
+interface Props {
+  logoText?: string;
+  phone?: string;
+  email?: string;
+  groups?: LinkGroup[];
+}
+
+const { logoText = 'Logo', phone, email, groups = [] } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">
+        <Image src={logo} alt={logoText} height={44} />
+      </a>
+      {phone && (
+        <a class="footer-contact" href={`tel:${phone.replace(/[^\d+]/g, '')}`}>{phone}</a>
+      )}
+      {email && (
+        <a class="footer-contact" href={`mailto:${email}`}>{email}</a>
+      )}
+    </div>
+    <div class="footer-groups">
+      {groups.map((group) => (
+        <div class="footer-group">
+          <h4>{group.heading}</h4>
+          <ul>
+            {group.links.map((link) => (
+              <li><a href={link.href}>{link.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">&copy; {year} {logoText}. All rights reserved.</p>
+      {/* Standing rule for every site built from this starter kit — do not
+          remove or make optional. See astro-dept SKILL.md Universal Standards. */}
+      <p class="built-by">Website by <a href="https://scalekit.io" target="_blank" rel="noopener noreferrer">ScaleKit.io</a></p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: var(--space-7) var(--space-5);
+    background: var(--color-primary);
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) 2.5fr;
+    gap: var(--space-6);
+  }
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+  .footer-logo :global(img) {
+    height: 44px;
+    width: auto;
+    display: block;
+    filter: brightness(0) invert(1);
+  }
+  .footer-contact {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 0.95rem;
+    color: var(--color-bg);
+    opacity: 0.85;
+    text-decoration: none;
+  }
+  .footer-contact:hover {
+    opacity: 1;
+  }
+  .footer-groups {
+    display: flex;
+    gap: var(--space-7);
+    flex-wrap: wrap;
+    margin-left: 35%;
+  }
+  .footer-group h4 {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-muted);
+    margin: 0 0 var(--space-3);
+  }
+  .footer-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .footer-group a {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 0.95rem;
+    color: var(--color-bg);
+    opacity: 0.85;
+    text-decoration: none;
+  }
+  .footer-group a:hover {
+    opacity: 1;
+  }
+  .footer-bottom {
+    grid-column: 1 / -1;
+    border-top: 1px solid rgba(243, 239, 229, 0.2);
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+  }
+  .footer-copyright {
+    font-size: 0.85rem;
+    color: var(--color-bg);
+    opacity: 0.7;
+    margin: 0;
+  }
+  .built-by {
+    font-size: 0.8rem;
+    color: var(--color-bg);
+    opacity: 0.6;
+    margin-top: var(--space-2);
+  }
+  .built-by a {
+    color: inherit;
+  }
+
+  @media (max-width: 760px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+    }
+    .footer-groups {
+      gap: var(--space-5);
+      margin-left: 0;
+    }
+  }
+</style>

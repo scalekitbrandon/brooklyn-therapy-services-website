@@ -1,0 +1,105 @@
+---
+interface Props {
+  eyebrow?: string;
+  statement: string;
+  supporting: string;
+  linkLabel?: string;
+  linkHref?: string;
+  background?: 'muted' | 'bg';
+  texture?: boolean;
+}
+
+const {
+  eyebrow,
+  statement,
+  supporting,
+  linkLabel,
+  linkHref,
+  background = 'muted',
+  texture = false,
+} = Astro.props;
+---
+
+<section class="philosophy" data-bg={background} data-texture={texture ? 'true' : 'false'}>
+  <div class="philosophy-inner">
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <p class="statement">{statement}</p>
+    <p class="supporting">{supporting}</p>
+    {linkLabel && linkHref && (
+      <a class="philosophy-link" href={linkHref}>{linkLabel} →</a>
+    )}
+  </div>
+</section>
+
+<style>
+  .philosophy {
+    position: relative;
+    background: var(--color-muted);
+    padding-block: var(--space-8);
+  }
+  .philosophy[data-bg='bg'] {
+    background: var(--color-bg);
+  }
+  .philosophy[data-texture='true'] {
+    background: var(--color-muted);
+  }
+  .philosophy[data-texture='true']::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 180px 180px;
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+  .philosophy-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+    text-align: center;
+  }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-primary);
+    margin: 0 0 var(--space-4);
+  }
+  .statement {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+    line-height: 1.4;
+    color: var(--color-fg);
+    margin: 0 0 var(--space-4);
+  }
+  .supporting {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--color-fg);
+    opacity: 0.75;
+    margin: 0;
+  }
+  .philosophy-link {
+    display: inline-block;
+    margin-top: var(--space-4);
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .philosophy-link:hover {
+    text-decoration: underline;
+  }
+</style>

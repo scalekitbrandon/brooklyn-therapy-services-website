@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import TeamHero from '../components/TeamHero.astro';
+import TeamRoster from '../components/TeamRoster.astro';
+import Footer from '../components/Footer.astro';
+import rachelPhoto from '../assets/images/rachel-headshot.jpg';
+import lilyPhoto from '../assets/images/lily-headshot.jpg';
+
+const footerGroups = [
+  {
+    heading: 'Explore',
+    links: [
+      { label: 'Home', href: '/' },
+      { label: 'Team', href: '/team' },
+      { label: 'Specialties', href: '/specialties' },
+      { label: 'Our Approach', href: '/approach' },
+      { label: 'Online Therapy', href: '/online-therapy' },
+      { label: 'Contact', href: '/#consultation-form' },
+      { label: 'FAQ', href: '/faq' },
+    ],
+  },
+  {
+    heading: 'What We Help With',
+    links: [
+      { label: 'Individual Therapy', href: '/specialties/individual-therapy' },
+      { label: 'Couples Therapy', href: '/specialties/couples-therapy' },
+      { label: 'Anxiety', href: '/specialties/anxiety' },
+      { label: 'OCD', href: '/specialties/ocd' },
+      { label: 'Trauma & PTSD', href: '/specialties/trauma-ptsd' },
+      { label: 'Relationships & Attachment', href: '/specialties/relationships-attachment' },
+      { label: 'Life Transitions', href: '/specialties/life-transitions' },
+      { label: 'Sex & Intimacy', href: '/specialties/sex-intimacy' },
+      { label: 'Grief & Loss', href: '/specialties/grief-loss' },
+      { label: 'Stress & Burnout', href: '/specialties/stress-burnout' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Our Team | Brooklyn Therapy Services"
+  description="Meet the licensed therapists at Brooklyn Therapy Services."
+>
+  <Header slot="header" />
+
+  <TeamHero
+    eyebrow="Our Therapists"
+    headingBold="Find a Therapist"
+    headingLight="Who Feels Right for You"
+    paragraphs={[
+      "Every therapist on our team is licensed across New York, but each brings their own perspective, specialties, and way of working.",
+      "Tell us what you're carrying, and we'll help match you with someone who feels like the right fit — not just the next available appointment.",
+    ]}
+    ctaLabel="Start With a Consultation"
+    ctaHref="/contact"
+  />
+
+  <TeamRoster
+    therapists={[
+      {
+        name: 'Rachel Vetter',
+        credentials: 'LCSW',
+        title: 'Founder & Clinical Director',
+        photo: rachelPhoto,
+        bio: [
+          'Rachel is a Licensed Clinical Social Worker who works with individuals and couples navigating OCD, anxiety, trauma, depression, grief, relationship difficulties, and major life transitions.',
+          'Her approach is integrative, drawing primarily from psychodynamic therapy, Acceptance and Commitment Therapy (ACT), and Cognitive Behavioral Therapy (CBT). Rather than focusing on symptoms in isolation, Rachel helps clients understand the emotional and relational patterns beneath them while developing practical ways to respond differently.',
+          'Rachel has particular experience working with OCD, severe anxiety, and complex trauma. Her style is warm, engaged, and collaborative, balancing insight and curiosity with directness and practical support.',
+          'Therapy with Rachel is a space to slow down, make sense of what has been difficult to understand on your own, and begin changing patterns that no longer serve you. The goal is not simply to feel better in the moment, but to develop greater clarity, flexibility, and confidence in how you move through your life and relationships.',
+        ],
+      },
+      {
+        name: 'Lily Berman',
+        credentials: 'LMSW',
+        title: 'Clinician',
+        photo: lilyPhoto,
+        bio: [
+          'Lily is a Licensed Master Social Worker who works with individuals navigating anxiety, depression, grief, addiction, life transitions, and longstanding emotional patterns.',
+          'Her approach integrates psychodynamic therapy, Acceptance and Commitment Therapy (ACT), and Cognitive Behavioral Therapy (CBT). Lily helps clients explore the experiences and patterns shaping their present lives while also developing practical skills for navigating difficult thoughts, emotions, and circumstances.',
+          "Lily's style is warm, accepting, and trauma-informed. She recognizes that therapy is not one-size-fits-all and works collaboratively with each client to develop an approach that reflects their individual needs, experiences, and goals.",
+          'Whether you are facing a recent challenge, feeling caught in familiar patterns, or hoping to understand yourself on a deeper level, Lily offers a nonjudgmental space to explore what is happening and what might need to change. Through a trusting therapeutic relationship, she helps clients develop greater insight, resilience, and the capacity for meaningful, lasting change.',
+        ],
+      },
+    ]}
+  />
+
+  <Footer
+    slot="footer"
+    logoText="Brooklyn Therapy Services"
+    email="info@brooklyntherapyservices.com"
+    groups={footerGroups}
+  />
+</BaseLayout>

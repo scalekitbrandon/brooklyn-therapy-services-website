@@ -1,0 +1,238 @@
+---
+import { Image } from 'astro:assets';
+import contactBg from '../assets/images/contact-bg.jpg';
+
+interface Props {
+  eyebrow?: string;
+  heading?: string;
+  supporting?: string;
+  details?: { label: string; value: string }[];
+}
+
+const {
+  eyebrow = 'Get In Touch',
+  heading = "Let's Talk",
+  supporting = "Reach out to schedule a free consultation or ask a question — we'll get back to you within one business day.",
+  details = [],
+} = Astro.props;
+---
+
+<section class="contact-cta" id="consultation-form">
+  <Image class="contact-bg" src={contactBg} alt="" width={2000} format="webp" quality={70} loading="lazy" />
+  <div class="contact-scrim"></div>
+  <div class="contact-inner">
+    <div class="contact-header">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2>{heading}</h2>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-copy">
+        <p class="supporting">{supporting}</p>
+        {details.length > 0 && (
+          <ul class="details">
+            {details.map((d) => (
+              <li>
+                <span class="detail-label">{d.label}</span>
+                <span class="detail-value">{d.value}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <form class="contact-form">
+        <div class="field-row">
+          <div class="field">
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" name="first-name" required />
+          </div>
+          <div class="field">
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" name="last-name" required />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="3"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-cta {
+    position: relative;
+    background: var(--color-fg);
+    padding-block: var(--space-6);
+    overflow: hidden;
+  }
+  .contact-cta :global(.contact-bg) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .contact-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(41, 35, 30, 0.6) 0%, rgba(41, 35, 30, 0.78) 100%);
+    z-index: 1;
+  }
+  .contact-inner {
+    position: relative;
+    z-index: 2;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+  }
+  .contact-header {
+    text-align: center;
+    margin-bottom: var(--space-5);
+  }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-muted);
+    margin: 0 0 var(--space-2);
+  }
+  h2 {
+    font-size: clamp(2rem, 3.2vw, 2.5rem);
+    color: var(--color-bg);
+    margin: 0;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+    align-items: center;
+  }
+  .contact-copy {
+    padding-top: 0;
+  }
+  .supporting {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-muted);
+    opacity: 0.9;
+    margin: 0 0 var(--space-4);
+    max-width: 440px;
+  }
+  .details {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .details li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .detail-label {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+  }
+  .detail-value {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 1rem;
+    color: var(--color-bg);
+  }
+  .contact-form {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  label {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-fg);
+    opacity: 0.7;
+  }
+  input,
+  textarea {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 1rem;
+    color: var(--color-fg);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    padding: 12px 14px;
+    resize: vertical;
+  }
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+  .submit-btn {
+    align-self: flex-start;
+    margin-top: var(--space-2);
+    padding: 14px 32px;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: var(--color-primary);
+    color: var(--color-primary-fg);
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-button);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+  .submit-btn:hover {
+    opacity: 0.85;
+  }
+
+  @media (max-width: 860px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+    .field-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,275 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import SpecialtyHero from '../components/SpecialtyHero.astro';
+import ProseSection from '../components/ProseSection.astro';
+import SignsList from '../components/SignsList.astro';
+import SpecialtyIndexGrid from '../components/SpecialtyIndexGrid.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import SpecialistMatch from '../components/SpecialistMatch.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import ContactCta from '../components/ContactCta.astro';
+import Footer from '../components/Footer.astro';
+import rachelPhoto from '../assets/images/rachel-headshot.jpg';
+import lilyPhoto from '../assets/images/lily-headshot.jpg';
+
+const footerGroups = [
+  {
+    heading: 'Explore',
+    links: [
+      { label: 'Home', href: '/' },
+      { label: 'Team', href: '/team' },
+      { label: 'Specialties', href: '/specialties' },
+      { label: 'Our Approach', href: '/approach' },
+      { label: 'Online Therapy', href: '/online-therapy' },
+      { label: 'Contact', href: '/#consultation-form' },
+      { label: 'FAQ', href: '/faq' },
+    ],
+  },
+  {
+    heading: 'What We Help With',
+    links: [
+      { label: 'Individual Therapy', href: '/specialties/individual-therapy' },
+      { label: 'Couples Therapy', href: '/specialties/couples-therapy' },
+      { label: 'Anxiety', href: '/specialties/anxiety' },
+      { label: 'OCD', href: '/specialties/ocd' },
+      { label: 'Trauma & PTSD', href: '/specialties/trauma-ptsd' },
+      { label: 'Relationships & Attachment', href: '/specialties/relationships-attachment' },
+      { label: 'Life Transitions', href: '/specialties/life-transitions' },
+      { label: 'Sex & Intimacy', href: '/specialties/sex-intimacy' },
+      { label: 'Grief & Loss', href: '/specialties/grief-loss' },
+      { label: 'Stress & Burnout', href: '/specialties/stress-burnout' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Online Therapy in New York | Brooklyn Therapy Services"
+  description="Licensed online therapy for clients anywhere in New York State. The same individualized, evidence-based care as our in-person sessions in Brooklyn, delivered over secure video."
+>
+  <Header slot="header" />
+
+  <SpecialtyHero
+    heading="Online Therapy in New York"
+    intro="Licensed therapy from anywhere in New York State — the same individualized, evidence-based care as our in-person sessions in Brooklyn, delivered over secure video."
+    ctaLabel="Book a Free Consultation"
+    ctaHref="#consultation-form"
+  />
+
+  <ProseSection
+    heading="What Is Online Therapy?"
+    paragraphs={[
+      'Online therapy (also called telehealth or teletherapy) is a full course of therapy conducted over secure, encrypted video — the same clinical relationship and approach as in-person sessions, without needing to travel.',
+      "As New York-licensed therapists, we're able to see clients located anywhere in the state, whether you're in Brooklyn, another borough, upstate, or simply prefer not to commute for your session.",
+      'Sessions typically happen weekly, in 45–50 minute video sessions, at the same day and time each week.',
+    ]}
+  />
+
+  <SpecialtyIndexGrid
+    eyebrow="Telehealth Across New York"
+    heading="Conditions We Treat Online"
+    items={[
+      {
+        title: 'Individual Therapy',
+        description: "Working through what's weighing on you, at your own pace, in a space that's just yours.",
+        href: '/specialties/individual-therapy',
+        icon: 'lamppost',
+      },
+      {
+        title: 'Couples Therapy',
+        description: 'Rebuilding communication, trust, and connection with the person you share your life with.',
+        href: '/specialties/couples-therapy',
+        icon: 'twinChairs',
+      },
+      {
+        title: 'Anxiety',
+        description: 'Understanding intrusive thoughts, hypervigilance, and internal pressure cycles.',
+        href: '/specialties/anxiety',
+        icon: 'waterTower',
+      },
+      {
+        title: 'OCD',
+        description: 'ERP-based treatment for obsessions, compulsions, and certainty-seeking cycles.',
+        href: '/specialties/ocd',
+        icon: 'streetClock',
+      },
+      {
+        title: 'Trauma & PTSD',
+        description: 'Processing experiences that continue to shape emotional safety and connection.',
+        href: '/specialties/trauma-ptsd',
+        icon: 'bridgeTowers',
+      },
+      {
+        title: 'Relationships & Attachment',
+        description: 'Exploring how closeness, distance, and repetition show up in connection.',
+        href: '/specialties/relationships-attachment',
+        icon: 'rowhouse',
+      },
+      {
+        title: 'Life Transitions',
+        description: 'Supporting periods of change, uncertainty, or identity shifts.',
+        href: '/specialties/life-transitions',
+        icon: 'subway',
+      },
+      {
+        title: 'Sex & Intimacy',
+        description: 'Working through shame, desire, disconnection, and relational intimacy concerns.',
+        href: '/specialties/sex-intimacy',
+        icon: 'ferry',
+      },
+      {
+        title: 'Grief & Loss',
+        description: 'Holding space for mourning, loss, and the slow process of learning to carry it.',
+        href: '/specialties/grief-loss',
+        icon: 'tree',
+      },
+      {
+        title: 'Stress & Burnout',
+        description: 'Recognizing chronic stress and the toll of doing too much for too long.',
+        href: '/specialties/stress-burnout',
+        icon: 'fireEscape',
+      },
+    ]}
+  />
+
+  <SignsList
+    heading="Is Online Therapy Right for You?"
+    intro="Online therapy works well for most people and most concerns. It's a particularly good fit if:"
+    signs={[
+      'You live outside Brooklyn but want to work with one of our therapists',
+      'A demanding schedule makes commuting to in-person sessions difficult',
+      'You feel just as comfortable, or more comfortable, opening up from home',
+      'You travel frequently within New York and want continuity of care',
+      'Mobility, health, or caregiving responsibilities make leaving home difficult',
+      "You've done in-person therapy before and are ready to try telehealth",
+    ]}
+    note="Online therapy isn't a lesser version of in-person care — for many people, it's simply the more sustainable one."
+  />
+
+  <ProseSection
+    heading="Our Approach to Online Therapy"
+    paragraphs={[
+      'We use the same evidence-based and insight-oriented approaches online as we do in person — ACT, CBT, psychodynamic therapy, and more — adapted thoughtfully for a virtual setting.',
+      'Sessions take place over a secure, encrypted video platform. All you need is a private space and a stable internet connection.',
+    ]}
+  />
+
+  <SpecialtyIndexGrid
+    eyebrow="Telehealth Across New York"
+    heading="Modalities We Use Online"
+    items={[
+      {
+        title: 'ACT',
+        description: 'Building psychological flexibility — making room for difficult thoughts and feelings while still moving toward what matters.',
+        href: '/approach/act',
+        icon: 'lamppost',
+      },
+      {
+        title: 'CBT',
+        description: 'Identifying and shifting the thought patterns that keep anxiety, depression, and stress in place.',
+        href: '/approach/cbt',
+        icon: 'subway',
+      },
+      {
+        title: 'Psychodynamic Therapy',
+        description: 'Exploring the deeper emotional patterns and past experiences shaping how you think, feel, and relate today.',
+        href: '/approach/psychodynamic',
+        icon: 'bridgeTowers',
+      },
+      {
+        title: 'ERP',
+        description: 'A structured, evidence-based approach for reducing OCD compulsions and anxiety-driven avoidance.',
+        href: '/approach/erp',
+        icon: 'waterTower',
+      },
+      {
+        title: 'IFS',
+        description: 'Understanding the different parts of yourself — and building a more compassionate relationship with all of them.',
+        href: '/approach/ifs',
+        icon: 'rowhouse',
+      },
+    ]}
+  />
+
+  <HowItWorks
+    heading="Getting Started Is Simple"
+    steps={[
+      {
+        number: '01',
+        title: 'Reach Out',
+        description: 'Send a message or book a free 15-minute consultation so we can understand what you need and answer any questions.',
+      },
+      {
+        number: '02',
+        title: 'Get Matched',
+        description: "We'll pair you with a therapist whose approach and specialty fit your goals — no guesswork, no starting over.",
+      },
+      {
+        number: '03',
+        title: 'Begin Your Work',
+        description: 'Start weekly video sessions, in a space built for honest conversation and real progress.',
+      },
+    ]}
+    ctaLabel="Book a Free Consultation"
+    ctaHref="#consultation-form"
+  />
+
+  <SpecialistMatch
+    heading="Therapists Available Online"
+    specialists={[
+      {
+        name: 'Rachel Vetter',
+        credentials: 'LCSW',
+        photo: rachelPhoto,
+        blurb: 'Integrative approach blending psychodynamic work, ACT, and CBT — available for secure video sessions anywhere in New York.',
+        href: '/team',
+      },
+      {
+        name: 'Lily Berman',
+        credentials: 'LMSW',
+        photo: lilyPhoto,
+        blurb: 'Warm, trauma-informed care, available for secure video sessions anywhere in New York.',
+        href: '/team',
+      },
+    ]}
+  />
+
+  <FaqAccordion
+    faqs={[
+      {
+        question: 'Is online therapy as effective as in-person therapy?',
+        answer: 'Research consistently shows online therapy is as effective as in-person care for most concerns, including anxiety, depression, and relationship issues.',
+      },
+      {
+        question: 'What technology do I need for online therapy?',
+        answer: "Just a smartphone, tablet, or computer with a camera, microphone, and stable internet connection. We'll send a secure link before each session.",
+      },
+      {
+        question: 'Can I do online therapy from anywhere in New York?',
+        answer: 'Yes — as New York-licensed therapists, we can see clients located anywhere in the state via telehealth.',
+      },
+      {
+        question: 'What if I want to switch between online and in-person sessions?',
+        answer: "That's fine — many clients move between the two depending on their schedule or what feels right that week, as long as you're located in New York.",
+      },
+      {
+        question: 'Is online therapy covered by insurance?',
+        answer: 'We are out-of-network providers and can supply a superbill for reimbursement, the same as for in-person sessions. Reach out and we can walk you through what that looks like for your specific plan.',
+      },
+    ]}
+  />
+
+  <ContactCta
+    details={[
+      { label: 'Email', value: 'info@brooklyntherapyservices.com' },
+    ]}
+  />
+
+  <Footer
+    slot="footer"
+    logoText="Brooklyn Therapy Services"
+    email="info@brooklyntherapyservices.com"
+    groups={footerGroups}
+  />
+</BaseLayout>

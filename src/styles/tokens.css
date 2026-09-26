@@ -1,0 +1,39 @@
+/*
+  Brooklyn Therapy Services — brand tokens (astro-brand output).
+  Component code must reference these custom properties, never raw hex/px.
+*/
+:root {
+  --color-bg: #F3EFE5;        /* Parchment */
+  --color-fg: #29231E;        /* Espresso */
+  --color-primary: #596047;   /* Deep Olive */
+  --color-primary-fg: #F3EFE5;
+  --color-accent: #8A6247;    /* Clay/Brown accent */
+  --color-accent-fg: #F3EFE5;
+  --color-sage: #7B8065;      /* Sage accent */
+  --color-muted: #D8D0C3;     /* Mushroom */
+  --color-border: #D8D0C3;
+
+  --font-heading: 'Cormorant Garamond', 'Georgia', serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-weight-heading: 500;
+  --font-weight-body: 400;
+  --font-weight-nav: 500;
+  --font-weight-max: 500;
+  --font-weight-button: 500;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 96px;
+
+  --container-max: 1200px;
+}

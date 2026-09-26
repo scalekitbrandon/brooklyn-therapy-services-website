@@ -1,0 +1,203 @@
+---
+import { Image } from 'astro:assets';
+import areasBg from '../assets/images/areas-bg.jpg';
+
+interface Area {
+  title: string;
+  description: string;
+  icon: keyof typeof ICONS;
+}
+
+interface Props {
+  eyebrow?: string;
+  heading: string;
+  areas: Area[];
+}
+
+const { eyebrow = 'What We Help With', heading, areas } = Astro.props;
+
+const ICON_ATTRS = 'viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"';
+
+const ICONS = {
+  lamppost: `<svg ${ICON_ATTRS}>
+    <path d="M24 44 V18" />
+    <path d="M17 44 H31" />
+    <path d="M19 18 H29 V10 H19 Z" />
+    <path d="M19 10 L24 5 L29 10 Z" />
+    <path d="M22 14 H26" />
+  </svg>`,
+  twinChairs: `<svg ${ICON_ATTRS}>
+    <path d="M6 44 V30 Q6 26 10 26 H16 Q20 26 20 30 V44" />
+    <path d="M6 38 H20" />
+    <path d="M28 44 V30 Q28 26 32 26 H38 Q42 26 42 30 V44" />
+    <path d="M28 38 H42" />
+  </svg>`,
+  waterTower: `<svg ${ICON_ATTRS}>
+    <path d="M24 6 L15 14 H33 Z" />
+    <path d="M15 14 H33 V32 H15 Z" />
+    <path d="M15 20 H33" />
+    <path d="M15 26 H33" />
+    <path d="M18 32 L11 42" />
+    <path d="M18 32 L23 42" />
+    <path d="M30 32 L37 42" />
+    <path d="M30 32 L25 42" />
+    <path d="M13 38 H35" />
+  </svg>`,
+  bridgeTowers: `<svg ${ICON_ATTRS}>
+    <path d="M12 40 V16 L15 10 L18 16 V40" />
+    <path d="M30 40 V16 L33 10 L36 16 V40" />
+    <path d="M4 34 Q24 14 44 34" />
+    <path d="M8 40 L15 30" />
+    <path d="M40 40 L33 30" />
+    <path d="M4 40 H44" />
+  </svg>`,
+  rowhouse: `<svg ${ICON_ATTRS}>
+    <path d="M10 42 V20 L24 8 L38 20 V42" />
+    <path d="M20 42 V32 H28 V42" />
+    <path d="M14 24 H19 V29 H14 Z" />
+    <path d="M29 24 H34 V29 H29 Z" />
+    <path d="M16 42 L14 46 H34 L32 42" />
+  </svg>`,
+  subway: `<svg ${ICON_ATTRS}>
+    <path d="M9 16 H33 Q39 16 39 22 V32 H9 Z" />
+    <path d="M9 22 H39" />
+    <path d="M14 16 V22 M22 16 V22 M30 16 V22" />
+    <circle cx="16" cy="36" r="3" />
+    <circle cx="32" cy="36" r="3" />
+    <path d="M2 20 H6 M2 25 H6 M2 30 H6" />
+  </svg>`,
+  ferry: `<svg ${ICON_ATTRS}>
+    <path d="M8 30 L12 38 H36 L40 30 Z" />
+    <path d="M16 30 V20 H32 V30" />
+    <path d="M22 20 V12" />
+    <path d="M22 12 L30 15" />
+    <path d="M4 42 Q10 38 16 42 T28 42 T40 42" />
+  </svg>`,
+  tree: `<svg ${ICON_ATTRS}>
+    <path d="M24 44 V27" />
+    <path d="M24 27 C15 28 9 19 15 13 C11 7 19 2 24 7 C29 2 37 7 33 13 C39 19 33 28 24 27 Z" />
+  </svg>`,
+  fireEscape: `<svg ${ICON_ATTRS}>
+    <path d="M8 12 H40" />
+    <path d="M8 12 V8 M14 12 V8 M20 12 V8 M26 12 V8 M32 12 V8 M38 12 V8" />
+    <path d="M10 12 L16 41" />
+    <path d="M38 12 L32 41" />
+    <path d="M13 22 H35" />
+    <path d="M12 31 H33.5" />
+  </svg>`,
+  streetClock: `<svg ${ICON_ATTRS}>
+    <path d="M24 44 V20" />
+    <path d="M17 44 H31" />
+    <circle cx="24" cy="12" r="8.5" />
+    <path d="M24 8 V12 L28 14" />
+  </svg>`,
+};
+---
+
+<section class="areas">
+  <Image class="areas-bg" src={areasBg} alt="" width={2400} format="webp" quality={70} loading="lazy" />
+  <div class="areas-scrim"></div>
+  <div class="areas-inner">
+    <p class="eyebrow">{eyebrow}</p>
+    <h2>{heading}</h2>
+    <div class="areas-list">
+      {areas.map((area) => (
+        <div class="area">
+          <div class="icon-circle" set:html={ICONS[area.icon]} />
+          <h3>{area.title}</h3>
+          <p>{area.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .areas {
+    position: relative;
+    background: var(--color-fg);
+    padding-block: var(--space-8);
+    overflow: hidden;
+  }
+  .areas :global(.areas-bg) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .areas-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(41, 35, 30, 0.72) 0%, rgba(41, 35, 30, 0.82) 100%);
+    z-index: 1;
+  }
+  .areas-inner {
+    position: relative;
+    z-index: 2;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+    text-align: center;
+  }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-muted);
+    margin: 0 0 var(--space-3);
+  }
+  h2 {
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    color: var(--color-bg);
+    margin: 0 0 var(--space-7);
+  }
+  .areas-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-7) var(--space-5);
+  }
+  .area {
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .icon-circle {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-4);
+    flex-shrink: 0;
+  }
+  .icon-circle :global(svg) {
+    width: 44px;
+    height: 44px;
+  }
+  .area h3 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-heading);
+    font-size: 1.3rem;
+    color: var(--color-bg);
+    margin: 0 0 var(--space-2);
+  }
+  .area p {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--color-muted);
+    opacity: 0.9;
+    margin: 0;
+  }
+</style>

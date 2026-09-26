@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import SpecialtyHero from '../../components/SpecialtyHero.astro';
+import ProseSection from '../../components/ProseSection.astro';
+import SignsList from '../../components/SignsList.astro';
+import HowItWorks from '../../components/HowItWorks.astro';
+import SpecialistMatch from '../../components/SpecialistMatch.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import RelatedSpecialties from '../../components/RelatedSpecialties.astro';
+import ContactCta from '../../components/ContactCta.astro';
+import Footer from '../../components/Footer.astro';
+import rachelPhoto from '../../assets/images/rachel-headshot.jpg';
+import lilyPhoto from '../../assets/images/lily-headshot.jpg';
+
+const footerGroups = [
+  {
+    heading: 'Explore',
+    links: [
+      { label: 'Home', href: '/' },
+      { label: 'Team', href: '/team' },
+      { label: 'Specialties', href: '/specialties' },
+      { label: 'Our Approach', href: '/approach' },
+      { label: 'Online Therapy', href: '/online-therapy' },
+      { label: 'Contact', href: '/#consultation-form' },
+      { label: 'FAQ', href: '/faq' },
+    ],
+  },
+  {
+    heading: 'What We Help With',
+    links: [
+      { label: 'Individual Therapy', href: '/specialties/individual-therapy' },
+      { label: 'Couples Therapy', href: '/specialties/couples-therapy' },
+      { label: 'Anxiety', href: '/specialties/anxiety' },
+      { label: 'OCD', href: '/specialties/ocd' },
+      { label: 'Trauma & PTSD', href: '/specialties/trauma-ptsd' },
+      { label: 'Relationships & Attachment', href: '/specialties/relationships-attachment' },
+      { label: 'Life Transitions', href: '/specialties/life-transitions' },
+      { label: 'Sex & Intimacy', href: '/specialties/sex-intimacy' },
+      { label: 'Grief & Loss', href: '/specialties/grief-loss' },
+      { label: 'Stress & Burnout', href: '/specialties/stress-burnout' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Psychodynamic Therapist in Brooklyn, NY | Psychodynamic Psychotherapy | Brooklyn Therapy Services"
+  description="Work with a psychodynamic therapist in Brooklyn for insight-oriented psychodynamic psychotherapy — in person or through online psychodynamic therapy across New York."
+>
+  <Header slot="header" />
+
+  <SpecialtyHero
+    heading="Psychodynamic Therapist in Brooklyn, NY"
+    intro="Work with a psychodynamic therapist in Brooklyn for insight-oriented psychodynamic psychotherapy — understanding the deeper emotional patterns, often rooted in early relationships, that continue to shape how you think, feel, and relate today."
+    ctaLabel="Book a Free Consultation"
+    ctaHref="#consultation-form"
+  />
+
+  <ProseSection
+    heading="What Is Psychodynamic Therapy?"
+    paragraphs={[
+      'Psychodynamic therapy — sometimes called psychodynamic psychotherapy — explores how past experiences, especially early relationships, continue to influence your present-day thoughts, emotions, and behavior, often outside conscious awareness.',
+      "Rather than focusing only on symptom relief, a psychodynamic psychotherapist works with you toward deeper, lasting change by helping you understand the 'why' behind your patterns, not just the 'what.'",
+      'Sessions typically happen weekly, in 45–50 minute sessions — in person with a psychodynamic therapist in our Brooklyn office, or through online psychodynamic therapy for clients anywhere in New York.',
+    ]}
+  />
+
+  <SignsList
+    heading="What Psychodynamic Therapy Can Help With"
+    intro="This approach is especially effective for:"
+    signs={[
+      "Recurring patterns in relationships you can't quite explain",
+      'A sense that something deeper is driving your anxiety or mood',
+      'Difficulty understanding your own reactions or triggers',
+      'Complex trauma and attachment-related concerns',
+      'Wanting more than symptom management — real self-understanding',
+      "Longstanding patterns that other approaches haven't fully addressed",
+    ]}
+    note="This work tends to be slower and more exploratory than skills-based therapy — but for many people, it's what finally makes the patterns make sense."
+  />
+
+  <ProseSection
+    heading="Our Approach to Psychodynamic Therapy"
+    paragraphs={[
+      'We use psychodynamic therapy as a foundation for understanding the emotional and relational patterns underneath what brought you in, often alongside more practical tools from ACT and CBT.',
+      'The therapeutic relationship itself is often part of the work — a place to notice and understand patterns as they show up in real time.',
+    ]}
+  />
+
+  <HowItWorks
+    heading="Getting Started Is Simple"
+    steps={[
+      {
+        number: '01',
+        title: 'Reach Out',
+        description: 'Send a message or book a free 15-minute consultation so we can understand what you need and answer any questions.',
+      },
+      {
+        number: '02',
+        title: 'Get Matched',
+        description: "We'll pair you with a therapist whose approach and specialty fit your goals — no guesswork, no starting over.",
+      },
+      {
+        number: '03',
+        title: 'Begin Your Work',
+        description: 'Start weekly sessions, in-person or online, in a space built for honest conversation and real progress.',
+      },
+    ]}
+    ctaLabel="Book a Free Consultation"
+    ctaHref="#consultation-form"
+  />
+
+  <SpecialistMatch
+    heading="Therapists Who Use Psychodynamic Therapy"
+    specialists={[
+      {
+        name: 'Rachel Vetter',
+        credentials: 'LCSW',
+        photo: rachelPhoto,
+        blurb: 'Integrative approach blending psychodynamic work, ACT, and CBT — tailored to your specific goals.',
+        href: '/team',
+      },
+      {
+        name: 'Lily Berman',
+        credentials: 'LMSW',
+        photo: lilyPhoto,
+        blurb: 'Integrates psychodynamic therapy alongside ACT and CBT for a warm, collaborative approach.',
+        href: '/team',
+      },
+    ]}
+  />
+
+  <FaqAccordion
+    faqs={[
+      {
+        question: "Does this mean we'll just talk about my childhood?",
+        answer: "Not exclusively. We'll explore your history where it's relevant, but the focus stays connected to your present-day patterns and goals.",
+      },
+      {
+        question: 'How is this different from CBT?',
+        answer: 'CBT is more structured and present-focused; psychodynamic therapy is more exploratory and looks at deeper, often unconscious patterns. We frequently blend the two.',
+      },
+      {
+        question: 'How long does psychodynamic therapy typically take?',
+        answer: 'This tends to be longer-term work — many clients continue for a year or more, though the pace and depth are always collaborative.',
+      },
+      {
+        question: "Is this a good fit if I've never been in therapy before?",
+        answer: "Yes — this approach works well whether it's your first time in therapy or you've done other kinds of work before.",
+      },
+      {
+        question: 'Do you offer online psychodynamic therapy in New York?',
+        answer: 'Yes — we offer online psychodynamic therapy for clients located anywhere in New York, in addition to in-person sessions with a psychodynamic therapist in Brooklyn.',
+      },
+    ]}
+  />
+
+  <RelatedSpecialties
+    heading="Related Conditions & Approaches"
+    items={[
+      { label: 'Relationships & Attachment', href: '/specialties/relationships-attachment' },
+      { label: 'Trauma & PTSD', href: '/specialties/trauma-ptsd' },
+      { label: 'ACT', href: '/approach/act' },
+      { label: 'CBT', href: '/approach/cbt' },
+      { label: 'ERP', href: '/approach/erp' },
+      { label: 'IFS', href: '/approach/ifs' },
+    ]}
+  />
+
+  <ContactCta
+    details={[
+      { label: 'Email', value: 'info@brooklyntherapyservices.com' },
+    ]}
+  />
+
+  <Footer
+    slot="footer"
+    logoText="Brooklyn Therapy Services"
+    email="info@brooklyntherapyservices.com"
+    groups={footerGroups}
+  />
+</BaseLayout>

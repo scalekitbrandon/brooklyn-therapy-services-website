@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import SpecialtyHero from '../../components/SpecialtyHero.astro';
+import ProseSection from '../../components/ProseSection.astro';
+import SignsList from '../../components/SignsList.astro';
+import HowItWorks from '../../components/HowItWorks.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import RelatedSpecialties from '../../components/RelatedSpecialties.astro';
+import ContactCta from '../../components/ContactCta.astro';
+import Footer from '../../components/Footer.astro';
+
+const footerGroups = [
+  {
+    heading: 'Explore',
+    links: [
+      { label: 'Home', href: '/' },
+      { label: 'Team', href: '/team' },
+      { label: 'Specialties', href: '/specialties' },
+      { label: 'Our Approach', href: '/approach' },
+      { label: 'Online Therapy', href: '/online-therapy' },
+      { label: 'Contact', href: '/#consultation-form' },
+      { label: 'FAQ', href: '/faq' },
+    ],
+  },
+  {
+    heading: 'What We Help With',
+    links: [
+      { label: 'Individual Therapy', href: '/specialties/individual-therapy' },
+      { label: 'Couples Therapy', href: '/specialties/couples-therapy' },
+      { label: 'Anxiety', href: '/specialties/anxiety' },
+      { label: 'OCD', href: '/specialties/ocd' },
+      { label: 'Trauma & PTSD', href: '/specialties/trauma-ptsd' },
+      { label: 'Relationships & Attachment', href: '/specialties/relationships-attachment' },
+      { label: 'Life Transitions', href: '/specialties/life-transitions' },
+      { label: 'Sex & Intimacy', href: '/specialties/sex-intimacy' },
+      { label: 'Grief & Loss', href: '/specialties/grief-loss' },
+      { label: 'Stress & Burnout', href: '/specialties/stress-burnout' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="IFS Therapist in Brooklyn, NY | Internal Family Systems Therapy | Brooklyn Therapy Services"
+  description="Work with an IFS therapist in Brooklyn for Internal Family Systems therapy — in person or through online IFS therapy across New York."
+>
+  <Header slot="header" />
+
+  <SpecialtyHero
+    heading="IFS Therapist in Brooklyn, NY"
+    intro="Work with an IFS therapist in Brooklyn for Internal Family Systems therapy — a compassionate framework for understanding the different 'parts' of yourself, including the ones that feel critical, anxious, or stuck."
+    ctaLabel="Book a Free Consultation"
+    ctaHref="#consultation-form"
+  />
+
+  <ProseSection
+    heading="What Is IFS (Internal Family Systems) Therapy?"
+    paragraphs={[
+      "Internal Family Systems (IFS) therapy is a therapeutic model based on the idea that we all contain multiple internal 'parts' — some protective, some wounded, some critical — each trying to help in its own way, even when the results don't feel helpful.",
+      'Rather than trying to eliminate difficult parts of yourself, an Internal Family Systems therapist helps you understand what each part is trying to do for you, so you can respond to them with curiosity instead of conflict.',
+      'Sessions typically happen weekly, in 45–50 minute sessions — in person with an IFS therapist in our Brooklyn office, or through online IFS therapy for clients anywhere in New York.',
+    ]}
+  />
+
+  <SignsList
+    heading="What IFS Can Help With"
+    intro="IFS is especially effective for:"
+    signs={[
+      'Harsh inner criticism or a persistent inner critic',
+      "Feeling like different 'versions' of yourself show up in different situations",
+      'Difficulty self-soothing or being kind to yourself',
+      'Complex trauma and parts that feel stuck in the past',
+      'Internal conflict between what you want and how you act',
+      'Wanting a gentler, less pathologizing way to understand yourself',
+    ]}
+    note="IFS isn't about getting rid of parts of yourself — even the ones that feel unhelpful. It's about understanding them well enough that they don't have to work so hard."
+  />
+
+  <ProseSection
+    heading="Our Approach to IFS"
+    paragraphs={[
+      'We draw on IFS-informed principles alongside psychodynamic and ACT-based work, particularly when clients are working through self-criticism, internal conflict, or complex trauma.',
+      'This work tends to be exploratory and paced by you — there is no rushing toward a particular part or memory before you are ready.',
+    ]}
+  />
+
+  <HowItWorks
+    heading="Getting Started Is Simple"
+    steps={[
+      {
+        number: '01',
+        title: 'Reach Out',
+        description: 'Send a message or book a free 15-minute consultation so we can understand what you need and answer any questions.',
+      },
+      {
+        number: '02',
+        title: 'Get Matched',
+        description: "We'll pair you with a therapist whose approach and specialty fit your goals — no guesswork, no starting over.",
+      },
+      {
+        number: '03',
+        title: 'Begin Your Work',
+        description: 'Start weekly sessions, in-person or online, in a space built for honest conversation and real progress.',
+      },
+    ]}
+    ctaLabel="Book a Free Consultation"
+    ctaHref="#consultation-form"
+  />
+
+  <FaqAccordion
+    faqs={[
+      {
+        question: 'Is IFS the same as talking about different personalities?',
+        answer: 'No — IFS parts are not separate personalities or a clinical disorder. Everyone has an internal multiplicity of feelings and reactions; IFS just gives you a framework for understanding them.',
+      },
+      {
+        question: 'How is IFS different from psychodynamic therapy?',
+        answer: 'They overlap in exploring internal patterns, but IFS uses a specific framework of "parts" and "Self," and often involves more direct, structured dialogue with those parts.',
+      },
+      {
+        question: 'Is IFS a good fit for trauma?',
+        answer: 'Yes — IFS is widely used for complex trauma, particularly when parts of you feel stuck in past experiences or in conflict with each other.',
+      },
+      {
+        question: 'How long does IFS work typically take?',
+        answer: 'This varies significantly depending on what you are working through — some clients see shifts within months, others continue longer for deeper trauma work.',
+      },
+      {
+        question: 'Do you offer online IFS therapy in New York?',
+        answer: 'Yes — we offer online IFS therapy for clients located anywhere in New York, in addition to in-person sessions with an IFS therapist in Brooklyn.',
+      },
+    ]}
+  />
+
+  <RelatedSpecialties
+    heading="Related Conditions & Approaches"
+    items={[
+      { label: 'IFS for Trauma', href: '/approach/ifs/for-trauma' },
+      { label: 'IFS for PTSD', href: '/approach/ifs/for-ptsd' },
+      { label: 'IFS for Complex Trauma', href: '/approach/ifs/for-complex-trauma' },
+      { label: 'IFS for Childhood Trauma', href: '/approach/ifs/for-childhood-trauma' },
+      { label: 'IFS for Anxiety', href: '/approach/ifs/for-anxiety' },
+      { label: 'IFS for Relationships', href: '/approach/ifs/for-relationships' },
+      { label: 'Trauma & PTSD', href: '/specialties/trauma-ptsd' },
+      { label: 'Relationships & Attachment', href: '/specialties/relationships-attachment' },
+      { label: 'ACT', href: '/approach/act' },
+      { label: 'CBT', href: '/approach/cbt' },
+      { label: 'Psychodynamic Therapy', href: '/approach/psychodynamic' },
+      { label: 'ERP', href: '/approach/erp' },
+    ]}
+  />
+
+  <ContactCta
+    details={[
+      { label: 'Email', value: 'info@brooklyntherapyservices.com' },
+    ]}
+  />
+
+  <Footer
+    slot="footer"
+    logoText="Brooklyn Therapy Services"
+    email="info@brooklyntherapyservices.com"
+    groups={footerGroups}
+  />
+</BaseLayout>

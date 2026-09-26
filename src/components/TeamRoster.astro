@@ -1,0 +1,156 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Therapist {
+  name: string;
+  credentials: string;
+  title: string;
+  photo?: ImageMetadata;
+  bio: string[];
+}
+
+interface Props {
+  therapists: Therapist[];
+}
+
+const { therapists } = Astro.props;
+---
+
+<section class="roster">
+  <div class="roster-inner">
+    {therapists.map((t, i) => (
+      <article class="therapist" data-flip={i % 2 === 1 ? 'true' : 'false'}>
+        <div class="therapist-media">
+          <div class="therapist-frame">
+            {t.photo ? (
+              <Image class="therapist-photo" src={t.photo} alt={t.name} width={700} format="webp" quality={78} />
+            ) : (
+              <div class="therapist-photo-placeholder">
+                <span>Photo Coming Soon</span>
+              </div>
+            )}
+          </div>
+        </div>
+        <div class="therapist-copy">
+          <h2>{t.name}</h2>
+          <p class="credentials">{t.credentials}</p>
+          <p class="title">{t.title}</p>
+          {t.bio.map((p) => (
+            <p class="bio-p">{p}</p>
+          ))}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .roster {
+    background: var(--color-bg);
+    padding-block: var(--space-7) var(--space-8);
+  }
+  .roster-inner {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+  }
+  .therapist {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: var(--space-7);
+    padding-block: var(--space-8);
+    align-items: start;
+  }
+  .therapist + .therapist {
+    border-top: 1px solid var(--color-border);
+  }
+  .therapist[data-flip='true'] {
+    direction: rtl;
+  }
+  .therapist[data-flip='true'] > * {
+    direction: ltr;
+  }
+  .therapist-media {
+    border: 1px solid var(--color-primary);
+    padding: var(--space-2);
+    width: 100%;
+  }
+  .therapist-frame {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+  }
+  .therapist-media :global(.therapist-photo) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+  .therapist-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--color-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--space-4);
+  }
+  .therapist-photo-placeholder span {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-fg);
+    opacity: 0.5;
+  }
+  .therapist-copy h2 {
+    font-size: clamp(1.75rem, 2.8vw, 2.25rem);
+    color: var(--color-fg);
+    margin: 0 0 var(--space-2);
+  }
+  .credentials {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin: 0 0 var(--space-1);
+  }
+  .title {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 1rem;
+    color: var(--color-fg);
+    opacity: 0.65;
+    margin: 0 0 var(--space-4);
+  }
+  .bio-p {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--color-fg);
+    opacity: 0.85;
+    margin: 0 0 var(--space-3);
+  }
+  .bio-p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 860px) {
+    .therapist,
+    .therapist[data-flip='true'] {
+      grid-template-columns: 1fr;
+      direction: ltr;
+    }
+    .therapist-media {
+      max-width: 380px;
+      margin-inline: auto;
+    }
+  }
+</style>

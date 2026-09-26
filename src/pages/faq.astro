@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import SpecialtyHero from '../components/SpecialtyHero.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import ContactCta from '../components/ContactCta.astro';
+import Footer from '../components/Footer.astro';
+
+const footerGroups = [
+  {
+    heading: 'Explore',
+    links: [
+      { label: 'Home', href: '/' },
+      { label: 'Team', href: '/team' },
+      { label: 'Specialties', href: '/specialties' },
+      { label: 'Our Approach', href: '/approach' },
+      { label: 'Online Therapy', href: '/online-therapy' },
+      { label: 'Contact', href: '/#consultation-form' },
+      { label: 'FAQ', href: '/faq' },
+    ],
+  },
+  {
+    heading: 'What We Help With',
+    links: [
+      { label: 'Individual Therapy', href: '/specialties/individual-therapy' },
+      { label: 'Couples Therapy', href: '/specialties/couples-therapy' },
+      { label: 'Anxiety', href: '/specialties/anxiety' },
+      { label: 'OCD', href: '/specialties/ocd' },
+      { label: 'Trauma & PTSD', href: '/specialties/trauma-ptsd' },
+      { label: 'Relationships & Attachment', href: '/specialties/relationships-attachment' },
+      { label: 'Life Transitions', href: '/specialties/life-transitions' },
+      { label: 'Sex & Intimacy', href: '/specialties/sex-intimacy' },
+      { label: 'Grief & Loss', href: '/specialties/grief-loss' },
+      { label: 'Stress & Burnout', href: '/specialties/stress-burnout' },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="FAQ | Brooklyn Therapy Services"
+  description="Answers to common questions about starting therapy at Brooklyn Therapy Services — insurance, scheduling, fees, confidentiality, and more."
+>
+  <Header slot="header" />
+
+  <SpecialtyHero
+    heading="Frequently Asked Questions"
+    intro="Answers to the questions we hear most before someone books a first session. If yours isn't here, reach out — we're happy to talk it through."
+    ctaLabel="Book a Free Consultation"
+    ctaHref="#consultation-form"
+  />
+
+  <FaqAccordion
+    faqs={[
+      {
+        question: 'Do you accept insurance?',
+        answer: 'We are out-of-network providers. We can supply a superbill after each session, which you can submit to your insurance for out-of-network reimbursement — reach out and we can walk you through what that typically looks like.',
+      },
+      {
+        question: 'What are your session fees?',
+        answer: "Rates vary by therapist and session type. Reach out or book a free consultation and we'll go over current rates and what to expect before you commit to anything.",
+      },
+      {
+        question: 'Do you offer sliding scale or reduced-fee sessions?',
+        answer: 'We hold a limited number of reduced-fee slots. Availability changes, so ask during your consultation and we will let you know what is currently open.',
+      },
+      {
+        question: 'How do I schedule my first session?',
+        answer: 'Start with a free 15-minute consultation — either through the form on this site or by phone or email. We will talk through what you are looking for and get you matched with a therapist from there.',
+      },
+      {
+        question: 'How do I know if I need therapy?',
+        answer: 'You do not need a crisis or a diagnosis to start. If something is weighing on you, feels stuck, or you simply want support thinking it through, that is reason enough.',
+      },
+      {
+        question: "What's the difference between individual and couples therapy?",
+        answer: 'Individual therapy is one-on-one, focused entirely on you. Couples therapy brings both partners into the room together, focused on the relationship. Many clients do one, the other, or both at different points.',
+      },
+      {
+        question: 'Do you offer both in-person and online sessions?',
+        answer: 'Yes. We see clients in person in Brooklyn and online for anyone located anywhere in New York, and many clients move between the two depending on their week.',
+      },
+      {
+        question: 'What if I need to cancel or reschedule?',
+        answer: 'We ask for at least 24 hours notice when possible so the time can be offered to another client. Life happens — talk to your therapist directly if something comes up last-minute.',
+      },
+      {
+        question: 'Is everything I share confidential?',
+        answer: 'Yes, with the standard legal and ethical exceptions any licensed therapist follows (risk of harm to yourself or others, for example). We will walk through the specifics of confidentiality in your first session.',
+      },
+      {
+        question: 'Can I switch therapists if it is not the right fit?',
+        answer: 'Yes. Fit matters more than momentum — if it is not clicking, tell us and we will help you find a better match on our team.',
+      },
+    ]}
+  />
+
+  <ContactCta
+    details={[
+      { label: 'Email', value: 'info@brooklyntherapyservices.com' },
+    ]}
+  />
+
+  <Footer
+    slot="footer"
+    logoText="Brooklyn Therapy Services"
+    email="info@brooklyntherapyservices.com"
+    groups={footerGroups}
+  />
+</BaseLayout>
