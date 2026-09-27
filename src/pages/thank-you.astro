@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const footerGroups = [
+  {
+    heading: 'Explore',
+    links: [
+      { label: 'Home', href: '/' },
+      { label: 'Team', href: '/team' },
+      { label: 'Specialties', href: '/specialties' },
+      { label: 'Our Approach', href: '/approach' },
+      { label: 'Online Therapy', href: '/online-therapy' },
+      { label: 'Contact', href: '/#consultation-form' },
+      { label: 'FAQ', href: '/faq' },
+    ],
+  },
+  {
+    heading: 'What We Help With',
+    links: [
+      { label: 'Individual Therapy', href: '/specialties/individual-therapy' },
+      { label: 'Couples Therapy', href: '/specialties/couples-therapy' },
+      { label: 'Anxiety', href: '/specialties/anxiety' },
+      { label: 'OCD', href: '/specialties/ocd' },
+      { label: 'Trauma & PTSD', href: '/specialties/trauma-ptsd' },
+      { label: 'Relationships & Attachment', href: '/specialties/relationships-attachment' },
+      { label: 'Life Transitions', href: '/specialties/life-transitions' },
+      { label: 'Sex & Intimacy', href: '/specialties/sex-intimacy' },
+      { label: 'Grief & Loss', href: '/specialties/grief-loss' },
+      { label: 'Stress & Burnout', href: '/specialties/stress-burnout' },
+    ],
+  },
+];
+
+const CHECK_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 L10 17 L19 7" /></svg>`;
+---
+
+<BaseLayout
+  title="Thank You | Brooklyn Therapy Services"
+  description="Your message has been received. We'll be in touch soon to schedule your free consultation."
+>
+  <Header slot="header" />
+
+  <section class="confirmation">
+    <div class="confirmation-inner">
+      <span class="check-icon" set:html={CHECK_ICON} />
+      <p class="eyebrow">Message Received</p>
+      <h1>We've Got Your Message.</h1>
+      <p class="body-copy">
+        Thank you for reaching out to Brooklyn Therapy Services. Check your email for next steps
+        on scheduling your free 15-minute consultation.
+      </p>
+      <p class="body-copy secondary">
+        In the meantime, feel free to look around — explore what we treat, learn about our
+        approach, or meet the team.
+      </p>
+      <div class="links">
+        <a class="pill primary" href="/">Back to Home</a>
+        <a class="pill" href="/specialties">Explore Specialties</a>
+        <a class="pill" href="/team">Meet the Team</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer
+    slot="footer"
+    logoText="Brooklyn Therapy Services"
+    email="info@brooklyntherapyservices.com"
+    groups={footerGroups}
+  />
+</BaseLayout>
+
+<style>
+  .confirmation {
+    background: var(--color-bg);
+    padding: var(--space-8) var(--space-4);
+    min-height: 65vh;
+    display: flex;
+    align-items: center;
+  }
+  .confirmation-inner {
+    max-width: 600px;
+    margin-inline: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .check-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-5);
+    flex-shrink: 0;
+  }
+  .check-icon :global(svg) {
+    width: 30px;
+    height: 30px;
+  }
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-nav);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-primary);
+    margin: 0 0 var(--space-3);
+  }
+  h1 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    color: var(--color-fg);
+    margin: 0 0 var(--space-4);
+  }
+  .body-copy {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--color-fg);
+    opacity: 0.85;
+    margin: 0 0 var(--space-3);
+  }
+  .body-copy.secondary {
+    opacity: 0.7;
+    font-size: 0.98rem;
+    margin-bottom: var(--space-6);
+  }
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
+  }
+  .pill {
+    display: inline-block;
+    padding: 12px 26px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-button);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    border: 1px solid var(--color-fg);
+    color: var(--color-fg);
+    background: transparent;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .pill:hover {
+    background: var(--color-fg);
+    color: var(--color-bg);
+  }
+  .pill.primary {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-primary-fg);
+  }
+  .pill.primary:hover {
+    opacity: 0.85;
+    background: var(--color-primary);
+    color: var(--color-primary-fg);
+  }
+</style>
