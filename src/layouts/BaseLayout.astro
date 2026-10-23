@@ -4,9 +4,14 @@ import '../styles/tokens.css';
 interface Props {
   title: string;
   description?: string;
+  noindex?: boolean;
 }
 
-const { title, description = '' } = Astro.props;
+const { title, description = '', noindex = false } = Astro.props;
+
+// GA4 measurement ID (G-XXXXXXX). Set PUBLIC_GA_ID in the Cloudflare build
+// environment; the tag only renders once it is set.
+const gaId = import.meta.env.PUBLIC_GA_ID;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL('/og-image.png', Astro.site);
@@ -23,7 +28,37 @@ const localBusinessSchema = {
   email: 'info@brooklyntherapyservices.com',
   image: logoURL.toString(),
   logo: logoURL.toString(),
-  areaServed: 'New York',
+  areaServed: [
+    { '@type': 'City', name: 'Brooklyn, NY' },
+    { '@type': 'State', name: 'New York' },
+  ],
+  knowsAbout: [
+    'Anxiety', 'Depression', 'OCD', 'Trauma and PTSD', 'Couples therapy',
+    'Grief and loss', 'Life transitions', 'Stress and burnout',
+    'Acceptance and Commitment Therapy (ACT)', 'Cognitive Behavioral Therapy (CBT)',
+    'Exposure and Response Prevention (ERP)', 'Internal Family Systems (IFS)',
+    'Psychodynamic therapy',
+  ],
+  founder: { '@id': `${Astro.site}team#rachel-vetter` },
+  employee: [
+    {
+      '@type': 'Person',
+      '@id': `${Astro.site}team#rachel-vetter`,
+      name: 'Rachel Vetter',
+      jobTitle: 'Founder & Clinical Director',
+      honorificSuffix: 'LCSW',
+      alumniOf: 'Fordham University Graduate School of Social Service',
+      url: `${Astro.site}team`,
+    },
+    {
+      '@type': 'Person',
+      '@id': `${Astro.site}team#lily-berman`,
+      name: 'Lily Berman',
+      jobTitle: 'Clinician',
+      honorificSuffix: 'LMSW',
+      url: `${Astro.site}team`,
+    },
+  ],
 };
 ---
 
@@ -34,6 +69,7 @@ const localBusinessSchema = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <meta name="generator" content={Astro.generator} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -59,6 +95,18 @@ const localBusinessSchema = {
     <meta name="twitter:image" content={ogImageURL} />
 
     <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+
+    {gaId && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script is:inline define:vars={{ gaId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', gaId);
+        </script>
+      </>
+    )}
   </head>
   <body>
     <slot name="header" />

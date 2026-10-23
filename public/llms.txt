@@ -1,0 +1,31 @@
+# Brooklyn Therapy Services
+
+> Therapy practice offering individual and couples therapy in person in Brooklyn, NY and online for clients anywhere in New York State. Out-of-network; superbills provided. Free 15-minute consultation.
+
+Contact: info@brooklyntherapyservices.com
+
+## Clinicians
+- [Rachel Vetter, LCSW (Founder & Clinical Director)](https://brooklyntherapyservices.com/team/): OCD, anxiety, complex trauma, relationships, grief, depression, life transitions. ACT, CBT, psychodynamic, IFS, ERP.
+- [Lily Berman, LMSW](https://brooklyntherapyservices.com/team/): anxiety, depression, grief, addiction, life transitions. Psychodynamic, ACT, CBT.
+
+## Specialties
+- [Individual Therapy](https://brooklyntherapyservices.com/specialties/individual-therapy/)
+- [Couples Therapy](https://brooklyntherapyservices.com/specialties/couples-therapy/)
+- [Anxiety](https://brooklyntherapyservices.com/specialties/anxiety/)
+- [Depression](https://brooklyntherapyservices.com/specialties/depression/)
+- [OCD](https://brooklyntherapyservices.com/specialties/ocd/)
+- [Trauma & PTSD](https://brooklyntherapyservices.com/specialties/trauma-ptsd/)
+- [Relationships & Attachment](https://brooklyntherapyservices.com/specialties/relationships-attachment/)
+- [Life Transitions](https://brooklyntherapyservices.com/specialties/life-transitions/)
+- [Sex & Intimacy](https://brooklyntherapyservices.com/specialties/sex-intimacy/)
+- [Grief & Loss](https://brooklyntherapyservices.com/specialties/grief-loss/)
+- [Stress & Burnout](https://brooklyntherapyservices.com/specialties/stress-burnout/)
+
+## Approaches
+- [ACT](https://brooklyntherapyservices.com/approach/act/)
+- [CBT](https://brooklyntherapyservices.com/approach/cbt/)
+- [ERP](https://brooklyntherapyservices.com/approach/erp/)
+- [IFS](https://brooklyntherapyservices.com/approach/ifs/)
+- [Psychodynamic Therapy](https://brooklyntherapyservices.com/approach/psychodynamic/)
+- [Online Therapy](https://brooklyntherapyservices.com/online-therapy/)
+- [FAQ](https://brooklyntherapyservices.com/faq/)
