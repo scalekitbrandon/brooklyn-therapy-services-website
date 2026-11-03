@@ -1,0 +1,67 @@
+---
+// GA4 tag + click tracking. Renders nothing until PUBLIC_GA_ID (G-XXXXXXX) is
+// set in the Cloudflare build environment (or a local .env).
+//
+// Events sent (no form field values or other personal data are ever sent):
+//   phone_call_click — any tel: link
+//   text_click       — any sms: link
+//   email_click      — any mailto: link
+//   cta_click        — buttons/links with a button-style class (btn, button, cta)
+//                      or that point at a contact/quote/booking page or form
+//   profile_click    — links out to Google Maps/Business Profile, Yelp, Facebook
+//   form_submit      — any form submit that passes the browser's required checks
+//   <custom>         — any element with data-track="event_name"
+// Each event carries link_text, link_url and click_location (header, footer,
+// or the nearest section id) so you can tell which button on the page got used.
+// Mark phone_call_click and form_submit as Key Events in GA4 Admin.
+const gaId = import.meta.env.PUBLIC_GA_ID || 'G-WYG7MHQQ8R';
+---
+
+{gaId && (
+  <>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+    <script is:inline define:vars={{ gaId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', gaId);
+
+      function where(el) {
+        if (el.closest('header')) return 'header';
+        if (el.closest('footer')) return 'footer';
+        const sec = el.closest('section[id], [id]');
+        return sec ? sec.id : 'page';
+      }
+      function label(el) {
+        return (el.getAttribute('aria-label') || el.textContent || el.value || '').trim().replace(/\s+/g, ' ').slice(0, 100);
+      }
+
+      document.addEventListener('click', function (e) {
+        const el = e.target.closest('a, button, [data-track]');
+        if (!el) return;
+        const href = el.getAttribute('href') || '';
+        const params = { link_text: label(el), link_url: href, click_location: where(el) };
+        let name = el.dataset.track;
+        if (!name) {
+          if (href.startsWith('tel:')) name = 'phone_call_click';
+          else if (href.startsWith('sms:')) name = 'text_click';
+          else if (href.startsWith('mailto:')) name = 'email_click';
+          else if (el.type === 'submit') return; // counted by form_submit
+          else if (el.hasAttribute('aria-expanded') || el.hasAttribute('aria-controls')) return; // menu/accordion toggles
+          else if (/\b(btn|button|cta)\b|(btn|button|cta)[-_]/i.test(el.getAttribute('class') || '')) name = 'cta_click';
+          else if (/(contact|quote|estimate|inspection|book|schedule|consult|appointment)/i.test(href)) name = 'cta_click';
+          else if (/(google\.com\/maps|maps\.google|g\.page|yelp\.com|facebook\.com)/i.test(href)) name = 'profile_click';
+        }
+        if (name) gtag('event', name, params);
+      }, true);
+
+      document.addEventListener('submit', function (e) {
+        const f = e.target;
+        gtag('event', 'form_submit', {
+          form_id: f.id || f.getAttribute('name') || '',
+          click_location: where(f),
+        });
+      }, true);
+    </script>
+  </>
+)}

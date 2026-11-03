@@ -1,4 +1,5 @@
 ---
+import Analytics from '../components/Analytics.astro';
 import '../styles/tokens.css';
 
 interface Props {
@@ -9,9 +10,6 @@ interface Props {
 
 const { title, description = '', noindex = false } = Astro.props;
 
-// GA4 measurement ID (G-XXXXXXX). Set PUBLIC_GA_ID in the Cloudflare build
-// environment; the tag only renders once it is set.
-const gaId = import.meta.env.PUBLIC_GA_ID;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL('/og-image.png', Astro.site);
@@ -67,6 +65,7 @@ const localBusinessSchema = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <Analytics />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="canonical" href={canonicalURL} />
     {noindex && <meta name="robots" content="noindex, follow" />}
@@ -95,18 +94,6 @@ const localBusinessSchema = {
     <meta name="twitter:image" content={ogImageURL} />
 
     <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
-
-    {gaId && (
-      <>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
-        <script is:inline define:vars={{ gaId }}>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', gaId);
-        </script>
-      </>
-    )}
   </head>
   <body>
     <slot name="header" />
